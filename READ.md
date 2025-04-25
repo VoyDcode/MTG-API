@@ -65,7 +65,7 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
 }
 ```
 
-#### UsuarioDTO
+### UsuarioDTO
 ```json
 {
   "id": 42,
@@ -75,7 +75,7 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
 }
 ```
 
-####FavoriteDTO
+### FavoriteDTO
 ```json
 {
   "usuarioId": 42,
