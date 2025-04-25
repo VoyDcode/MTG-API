@@ -98,8 +98,10 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
 ```
   # Listar decks
   curl https://api.deckbuildermtg.com/decks
-
+```
+```
   # Adicionar carta a um deck
   curl -X POST https://api.deckbuildermtg.com/decks/1/cards \
     -H "Content-Type: application/json" \
     -d '{"cardId":101}'
+```
