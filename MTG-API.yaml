@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Deck Builder MTG API
+  version: '1.0.0'
+  description: API para criação e gerenciamento de decks de Magic:The Gathering.
+
+servers:
+  - url: https://api.deckbuildermtg.com
+paths:
+  /decks:
+    get:
+      summary: Listar todos os decks
+      responses:
+        '200':
+          description: Lista de decks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeckDTO'
+        '500':
+          description: Erro interno
+    post:
+      summary: Criar novo deck
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeckDTO'
+      responses:
+        '201':
+          description: Deck criado
+        '400':
+          description: Requisição inválida
+        '500':
+          description: Erro interno
+  /decks/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Buscar deck por ID
+      responses:
+        '200':
+          description: Deck encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeckDTO'
+        '404':
+          description: Não encontrado
+        '500':
+          description: Erro interno
+    put:
+      summary: Atualizar deck
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeckDTO'
+      responses:
+        '200':
+          description: Atualização bem-sucedida
+        '400':
+          description: Requisição inválida
+        '404':
+          description: Não encontrado
+        '500':
+          description: Erro interno
+    delete:
+      summary: Excluir deck
+      responses:
+        '204':
+          description: Remoção bem-sucedida
+        '404':
+          description: Não encontrado
+        '500':
+          description: Erro interno
+
+components:
+  schemas:
+    DeckDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        formato:
+          type: string
+        descricao:
+          type: string
+        cartas:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartaDTO'
+        dataCriacao:
+          type: string
+          format: date-time
+      required: [nome, formato]
+    CartaDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        tipo:
+          type: string
+        cor:
+          type: string
+        custoMana:
+          type: string
+        descricao:
+          type: string
+        edicao:
+          type: string
+      required: [nome, tipo, cor, custoMana]
+    UsuarioDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        dataCadastro:
+          type: string
+          format: date-time
+      required: [nome, email]
+    FavoriteDTO:
+      type: object
+      properties:
+        usuarioId:
+          type: integer
+        deckId:
+          type: integer
+      required: [usuarioId, deckId]
