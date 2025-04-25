@@ -50,6 +50,7 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
   ],
   "dataCriacao": "2025-04-20T12:34:56Z"
 }
+```
 
 #### CartaDTO
 ```json
@@ -62,6 +63,7 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
   "descricao": "Cause 3 de dano a qualquer alvo.",
   "edicao": "M10"
 }
+```
 
 #### UsuarioDTO
 ```json
@@ -71,6 +73,7 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
   "email": "joao@example.com",
   "dataCadastro": "2025-04-18T09:00:00Z"
 }
+```
 
 ####FavoriteDTO
 ```json
