@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem, organizem e compartilhem seus decks de maneira eficiente. Através de operações CRUD em decks, cartas e usuários, proporciona um back-end padronizado para plataformas como Moxfield ou Archidekt.
+Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem, organizem e compartilhem seus decks de maneira eficiente. Através de operações CRUD em decks, cartas e usuários, proporciona um codigo padronizado para plataformas como Moxfield ou Archidekt.
 
 ## 2. Rotas da API
 
@@ -49,3 +49,32 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
     }
   ],
   "dataCriacao": "2025-04-20T12:34:56Z"
+}
+
+#### CartaDTO
+```json
+{
+  "id": 101,
+  "nome": "Lightning Bolt",
+  "tipo": "Instantâneo",
+  "cor": "Vermelho",
+  "custoMana": "R",
+  "descricao": "Cause 3 de dano a qualquer alvo.",
+  "edicao": "M10"
+}
+
+#### UsuarioDTO
+```json
+{
+  "id": 42,
+  "nome": "João Silva",
+  "email": "joao@example.com",
+  "dataCadastro": "2025-04-18T09:00:00Z"
+}
+
+####FavoriteDTO
+```json
+{
+  "usuarioId": 42,
+  "deckId": 1
+}
