@@ -81,3 +81,25 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
   "usuarioId": 42,
   "deckId": 1
 }
+```
+
+# Criar novo deck
+```json
+
+curl -X POST https://api.deckbuildermtg.com/decks \
+  -H "Content-Type: application/json" \
+  -d '{
+        "nome":"Burn Vermelho",
+        "formato":"Modern",
+        "descricao":"Deck rápido focado em dano direto.",
+        "cartas":[{"id":201}],
+        "dataCriacao":"2025-04-21T14:30:00Z"
+      }'
+
+# Listar decks
+curl https://api.deckbuildermtg.com/decks
+
+# Adicionar carta a um deck
+curl -X POST https://api.deckbuildermtg.com/decks/1/cards \
+  -H "Content-Type: application/json" \
+  -d '{"cardId":101}'

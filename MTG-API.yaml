@@ -2,8 +2,8 @@ openapi: 3.0.3
 info:
   title: Deck Builder MTG API
   version: '1.0.0'
-  description: API para criação e gerenciamento de decks de Magic:The Gathering.
-
+  description: |
+    API para criação e gerenciamento de decks de Magic: The Gathering.
 servers:
   - url: https://api.deckbuildermtg.com
 paths:
@@ -82,7 +82,249 @@ paths:
           description: Não encontrado
         '500':
           description: Erro interno
-
+  /cards:
+    get:
+      summary: Listar todas as cartas
+      responses:
+        '200':
+          description: Lista de cartas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartaDTO'
+        '500':
+          description: Erro interno
+    post:
+      summary: Cadastrar nova carta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartaDTO'
+      responses:
+        '201':
+          description: Carta criada
+        '400':
+          description: Requisição inválida
+        '500':
+          description: Erro interno
+  /cards/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Buscar carta por ID
+      responses:
+        '200':
+          description: Carta encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartaDTO'
+        '404':
+          description: Não encontrada
+        '500':
+          description: Erro interno
+    put:
+      summary: Atualizar carta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartaDTO'
+      responses:
+        '200':
+          description: Atualização bem-sucedida
+        '400':
+          description: Requisição inválida
+        '404':
+          description: Não encontrada
+        '500':
+          description: Erro interno
+    delete:
+      summary: Remover carta
+      responses:
+        '204':
+          description: Remoção bem-sucedida
+        '404':
+          description: Não encontrada
+        '500':
+          description: Erro interno
+  /users:
+    get:
+      summary: Listar todos os usuários
+      responses:
+        '200':
+          description: Lista de usuários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsuarioDTO'
+        '500':
+          description: Erro interno
+    post:
+      summary: Cadastrar novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioDTO'
+      responses:
+        '201':
+          description: Usuário criado
+        '400':
+          description: Requisição inválida
+        '500':
+          description: Erro interno
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Buscar usuário por ID
+      responses:
+        '200':
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDTO'
+        '404':
+          description: Não encontrado
+        '500':
+          description: Erro interno
+    put:
+      summary: Atualizar usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioDTO'
+      responses:
+        '200':
+          description: Atualização bem-sucedida
+        '400':
+          description: Requisição inválida
+        '404':
+          description: Não encontrado
+        '500':
+          description: Erro interno
+    delete:
+      summary: Deletar usuário
+      responses:
+        '204':
+          description: Remoção bem-sucedida
+        '404':
+          description: Não encontrado
+        '500':
+          description: Erro interno
+  /decks/{id}/cards:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Listar cartas de um deck
+      responses:
+        '200':
+          description: Lista de cartas do deck
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartaDTO'
+        '404':
+          description: Deck não encontrado
+        '500':
+          description: Erro interno
+    post:
+      summary: Adicionar carta a um deck
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cardId:
+                  type: integer
+              required: [cardId]
+      responses:
+        '201':
+          description: Carta adicionada ao deck
+        '400':
+          description: Requisição inválida
+        '404':
+          description: Deck ou carta não encontrado
+        '500':
+          description: Erro interno
+  /decks/{deckId}/cards/{cardId}:
+    parameters:
+      - in: path
+        name: deckId
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: cardId
+        required: true
+        schema:
+          type: integer
+    delete:
+      summary: Remover carta de um deck
+      responses:
+        '204':
+          description: Carta removida do deck
+        '404':
+          description: Deck ou carta não encontrado
+        '500':
+          description: Erro interno
+  /favorites:
+    get:
+      summary: Listar decks favoritos
+      responses:
+        '200':
+          description: Lista de favoritos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FavoriteDTO'
+        '500':
+          description: Erro interno
+    post:
+      summary: Adicionar deck aos favoritos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteDTO'
+      responses:
+        '201':
+          description: Favorito criado
+        '400':
+          description: Requisição inválida
+        '500':
+          description: Erro interno
 components:
   schemas:
     DeckDTO:
