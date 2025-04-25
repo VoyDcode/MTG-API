@@ -85,7 +85,6 @@ Esta API RESTful permite que jogadores de Magic: The Gathering criem, modifiquem
 
 # Criar novo deck
 ```json
-
 curl -X POST https://api.deckbuildermtg.com/decks \
   -H "Content-Type: application/json" \
   -d '{
